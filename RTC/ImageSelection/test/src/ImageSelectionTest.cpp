@@ -1,0 +1,167 @@
+﻿// -*- C++ -*-
+/*!
+ * @file  ImageSelectionTest.cpp
+ * @brief 画像を選別する
+ * @date $Date$
+ *
+ * $Id$
+ */
+
+#include "ImageSelectionTest.h"
+
+// Module specification
+// <rtc-template block="module_spec">
+static const char* imageselection_spec[] =
+  {
+    "implementation_id", "ImageSelectionTest",
+    "type_name",         "ImageSelectionTest",
+    "description",       "画像を選別する",
+    "version",           "1.0.0",
+    "vendor",            "Atsushi",
+    "category",          "Piling Human",
+    "activity_type",     "PERIODIC",
+    "kind",              "DataFlowComponent",
+    "max_instance",      "1",
+    "language",          "C++",
+    "lang_type",         "compile",
+    ""
+  };
+// </rtc-template>
+
+/*!
+ * @brief constructor
+ * @param manager Maneger Object
+ */
+ImageSelectionTest::ImageSelectionTest(RTC::Manager* manager)
+    // <rtc-template block="initializer">
+  : RTC::DataFlowComponentBase(manager),
+    m_ipImageIn("ipImage", m_ipImage),
+    m_opImageOut("opImage", m_opImage)
+
+    // </rtc-template>
+{
+}
+
+/*!
+ * @brief destructor
+ */
+ImageSelectionTest::~ImageSelectionTest()
+{
+}
+
+
+
+RTC::ReturnCode_t ImageSelectionTest::onInitialize()
+{
+  // Registration: InPort/OutPort/Service
+  // <rtc-template block="registration">
+  // Set InPort buffers
+  addInPort("opImage", m_opImageIn);
+
+  // Set OutPort buffer
+  addOutPort("ipImage", m_ipImageOut);
+
+  // Set service provider to Ports
+
+  // Set service consumers to Ports
+
+  // Set CORBA Service Ports
+
+  // </rtc-template>
+
+  // <rtc-template block="bind_config">
+  // </rtc-template>
+
+  return RTC::RTC_OK;
+}
+
+/*
+RTC::ReturnCode_t ImageSelectionTest::onFinalize()
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ImageSelectionTest::onStartup(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ImageSelectionTest::onShutdown(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+
+RTC::ReturnCode_t ImageSelectionTest::onActivated(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+
+
+RTC::ReturnCode_t ImageSelectionTest::onDeactivated(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+
+
+RTC::ReturnCode_t ImageSelectionTest::onExecute(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+
+/*
+RTC::ReturnCode_t ImageSelectionTest::onAborting(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ImageSelectionTest::onError(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ImageSelectionTest::onReset(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ImageSelectionTest::onStateUpdate(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ImageSelectionTest::onRateChanged(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+
+
+extern "C"
+{
+
+  void ImageSelectionTestInit(RTC::Manager* manager)
+  {
+    coil::Properties profile(imageselection_spec);
+    manager->registerFactory(profile,
+                             RTC::Create<ImageSelectionTest>,
+                             RTC::Delete<ImageSelectionTest>);
+  }
+
+};
+
+

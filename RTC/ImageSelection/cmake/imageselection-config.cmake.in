@@ -1,0 +1,54 @@
+# ImageSelection CMake config file
+#
+# This file sets the following variables:
+# ImageSelection_FOUND - Always TRUE.
+# ImageSelection_INCLUDE_DIRS - Directories containing the ImageSelection include files.
+# ImageSelection_IDL_DIRS - Directories containing the ImageSelection IDL files.
+# ImageSelection_LIBRARIES - Libraries needed to use ImageSelection.
+# ImageSelection_DEFINITIONS - Compiler flags for ImageSelection.
+# ImageSelection_VERSION - The version of ImageSelection found.
+# ImageSelection_VERSION_MAJOR - The major version of ImageSelection found.
+# ImageSelection_VERSION_MINOR - The minor version of ImageSelection found.
+# ImageSelection_VERSION_REVISION - The revision version of ImageSelection found.
+# ImageSelection_VERSION_CANDIDATE - The candidate version of ImageSelection found.
+
+message(STATUS "Found ImageSelection-@PROJECT_VERSION@")
+set(ImageSelection_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(ImageSelection_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(ImageSelection_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(ImageSelection_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(ImageSelection_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(ImageSelection_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(ImageSelection_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(ImageSelection_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(ImageSelection_VERSION @PROJECT_VERSION@)
+set(ImageSelection_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(ImageSelection_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(ImageSelection_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(ImageSelection_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
